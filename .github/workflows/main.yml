@@ -32,3 +32,20 @@ jobs:
           local_path: './*'
           remote_path: '${{ vars.SFTP_REMOTE_PLUGIN_PATH }}/woocommerce-memberships-cards'
           sftp_only: true
+          sync_filters: |
+            + admin/**
+            + assets/**
+            + includes/**
+            + templates/**
+            + vendor/**
+            + *.php
+            + LICENSE
+            + composer.json
+            + README.md
+            + readme.txt
+            - .git/**
+            - .github/**
+            - *.sh
+            - *.bat
+            - node_modules/**
+            - .gitignore

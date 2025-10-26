@@ -114,6 +114,11 @@ Plugin::load_template('membership-card.php', $args);
 
 ## Changelog
 
+### 1.0.6
+- Optimized SFTP deployment to only upload changed files
+- Added sync filters to exclude unnecessary files from deployment
+- Significantly faster deployments by skipping unchanged files
+
 ### 1.0.5
 - Implemented hybrid autoloading approach (vendor autoloader + manual class loading)
 - Changed from PSR-4 to classmap autoloading for better WordPress compatibility
