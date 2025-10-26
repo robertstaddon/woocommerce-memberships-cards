@@ -1,13 +1,14 @@
-name: Deploy to Development
+yamlname: Deploy to Development
 
 on:
   push:
     branches:
-      - develop  # adjust to your preferred branch
+      - develop
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
+    environment: Abundant Designs Beta Server
     
     steps:
       - name: Checkout code
@@ -19,8 +20,6 @@ jobs:
           username: ${{ secrets.SFTP_USERNAME }}
           server: ${{ secrets.SFTP_SERVER }}
           password: ${{ secrets.SFTP_PASSWORD }}
-          # or use SSH key (recommended):
-          # ssh_private_key: ${{ secrets.SFTP_SSH_KEY }}
           local_path: './*'
-          remote_path: '${{ secrets.SFTP_REMOTE_PLUGINS_PATH }}/woocommerce-membership-cards'
+          remote_path: '${{ secrets.SFTP_REMOTE_PATH }}/plugins/your-plugin-name'
           sftp_only: true
