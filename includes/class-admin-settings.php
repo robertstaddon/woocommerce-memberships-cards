@@ -20,7 +20,7 @@ class Admin_Settings {
     /**
      * Option name
      */
-    private const OPTION_NAME = 'wc_memberships_cards_logos';
+    public const OPTION_NAME = 'wc_memberships_cards_logos';
 
     /**
      * Constructor

@@ -114,6 +114,11 @@ Plugin::load_template('membership-card.php', $args);
 
 ## Changelog
 
+### 1.0.10
+- Fixed "Save Changes" button not persisting logos on Membership Cards Logos admin page
+- Changed OPTION_NAME constant from private to public to allow template access
+- Logos now properly save to database and persist after page reload
+
 ### 1.0.9
 - Fixed logo selector bug where clicking "Select Logo" on any membership plan after the first incorrectly updated the first plan's logo
 - Media uploader now creates fresh instance for each button click to capture correct planId

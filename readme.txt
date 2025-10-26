@@ -4,7 +4,7 @@ Tags: woocommerce, memberships, cards, pdf, my-account
 Requires at least: 6.0
 Tested up to: 6.4
 Requires PHP: 7.4
-Stable tag: 1.0.9
+Stable tag: 1.0.10
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -72,6 +72,11 @@ Go to WooCommerce → Membership Cards in the admin, and use the media uploader 
 3. Downloaded PDF example
 
 == Changelog ==
+
+= 1.0.10 =
+* Fixed "Save Changes" button not persisting logos on Membership Cards Logos admin page
+* Changed OPTION_NAME constant from private to public to allow template access
+* Logos now properly save to database and persist after page reload
 
 = 1.0.9 =
 * Fixed logo selector bug where clicking "Select Logo" on any membership plan after the first incorrectly updated the first plan's logo
