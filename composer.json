@@ -8,9 +8,7 @@
         "dompdf/dompdf": "^2.0"
     },
     "autoload": {
-        "psr-4": {
-            "WooCommerceMembershipsCards\\": "includes/"
-        }
+        "classmap": ["includes/"]
     },
     "config": {
         "allow-plugins": {
