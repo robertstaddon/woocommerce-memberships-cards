@@ -114,6 +114,11 @@ Plugin::load_template('membership-card.php', $args);
 
 ## Changelog
 
+### 1.0.9
+- Fixed logo selector bug where clicking "Select Logo" on any membership plan after the first incorrectly updated the first plan's logo
+- Media uploader now creates fresh instance for each button click to capture correct planId
+- Each membership plan now correctly updates its own logo when selected
+
 ### 1.0.8
 - Fixed SSH key setup in GitHub Actions using here-document syntax
 - Resolved multi-line private key formatting issues in deployment workflow

@@ -5,8 +5,6 @@
     'use strict';
 
     $(document).ready(function() {
-        let mediaUploader;
-
         // Handle logo upload
         $(document).on('click', '.wc-memberships-cards-upload-logo', function(e) {
             e.preventDefault();
@@ -14,14 +12,8 @@
             const $button = $(this);
             const planId = $button.data('plan-id');
 
-            // If the uploader object has already been created, reopen it
-            if (mediaUploader) {
-                mediaUploader.open();
-                return;
-            }
-
-            // Create the media uploader
-            mediaUploader = wp.media({
+            // Create the media uploader (always fresh to capture correct planId)
+            const mediaUploader = wp.media({
                 title: 'Select Logo Image',
                 button: {
                     text: 'Use this image'
