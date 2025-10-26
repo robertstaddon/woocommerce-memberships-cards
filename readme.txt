@@ -4,7 +4,7 @@ Tags: woocommerce, memberships, cards, pdf, my-account
 Requires at least: 6.0
 Tested up to: 6.4
 Requires PHP: 7.4
-Stable tag: 1.0.0
+Stable tag: 1.0.2
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -73,6 +73,11 @@ Go to WooCommerce → Membership Cards in the admin, and use the media uploader 
 
 == Changelog ==
 
+= 1.0.2 =
+* Fixed WooCommerce Memberships detection using wc_memberships() function
+* Added WooCommerce HPOS compatibility declaration
+* Improved plugin activation reliability
+
 = 1.0.0 =
 * Initial release
 * My Account endpoint for membership cards
@@ -84,6 +89,9 @@ Go to WooCommerce → Membership Cards in the admin, and use the media uploader 
 * Security with nonce verification
 
 == Upgrade Notice ==
+
+= 1.0.2 =
+Update recommended - fixes activation issues and adds WooCommerce compatibility declarations.
 
 = 1.0.0 =
 Initial release of WooCommerce Memberships Cards.

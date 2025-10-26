@@ -3,7 +3,7 @@
  * Plugin Name: WooCommerce Memberships Cards
  * Plugin URI: https://github.com/yourusername/woocommerce-memberships-cards
  * Description: Display membership cards with PDF download functionality on My Account page
- * Version: 1.0.7
+ * Version: 1.0.2
  * Author: Your Name
  * Author URI: https://your-site.com
  * License: GPL v2 or later
@@ -62,7 +62,7 @@ if (!function_exists('wc_memberships_cards_init')) {
         }
 
         // Check if WooCommerce Memberships is active
-        if (!class_exists('WC_Memberships')) {
+        if (!function_exists('wc_memberships')) {
             add_action('admin_notices', 'wc_memberships_cards_memberships_missing_notice');
             return;
         }
@@ -72,6 +72,17 @@ if (!function_exists('wc_memberships_cards_init')) {
     }
 
     add_action('plugins_loaded', 'wc_memberships_cards_init');
+
+    // Declare WooCommerce HPOS compatibility
+    add_action('before_woocommerce_init', function() {
+        if (class_exists('\Automattic\WooCommerce\Utilities\FeaturesUtil')) {
+            \Automattic\WooCommerce\Utilities\FeaturesUtil::declare_compatibility(
+                'custom_order_tables',
+                __FILE__,
+                true
+            );
+        }
+    });
 }
 
 /**

@@ -114,6 +114,11 @@ Plugin::load_template('membership-card.php', $args);
 
 ## Changelog
 
+### 1.0.2
+- Fixed WooCommerce Memberships detection using `wc_memberships()` function
+- Added WooCommerce HPOS (High-Performance Order Storage) compatibility declaration
+- Improved plugin activation reliability
+
 ### 1.0.0
 - Initial release
 - My Account endpoint for membership cards
