@@ -44,7 +44,7 @@ jobs:
       - name: Add Known Hosts
         run: |
           mkdir -p ~/.ssh
-          ssh-keyscan -H ${{ vars.SFTP_SERVER }} >> ~/.ssh/known_hosts
+          ssh-keyscan -p ${{ vars.SFTP_PORT }} -H ${{ vars.SFTP_SERVER }} >> ~/.ssh/known_hosts || true
       
       - name: Deploy via rsync
         run: |
