@@ -114,6 +114,12 @@ Plugin::load_template('membership-card.php', $args);
 
 ## Changelog
 
+### 1.0.7
+- Switched from SFTP to rsync for faster deployments
+- Implemented delta sync to only transfer changed files
+- Added SSH key-based authentication for secure deployment
+- Deployment speed improved by 5-10x for subsequent pushes
+
 ### 1.0.6
 - Optimized SFTP deployment to only upload changed files
 - Added sync filters to exclude unnecessary files from deployment

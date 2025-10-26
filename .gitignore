@@ -30,3 +30,7 @@ Thumbs.db
 /build/
 *.zip
 
+# SSH keys (do not commit!)
+github-actions-key
+github-actions-key.pub
+
