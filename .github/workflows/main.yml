@@ -48,4 +48,4 @@ jobs:
       
       - name: Deploy via rsync
         run: |
-          rsync -avz --delete -e "ssh" deploy/ ${{ vars.SFTP_USERNAME }}@${{ vars.SFTP_SERVER }}:${{ vars.SFTP_REMOTE_PLUGIN_PATH }}/woocommerce-memberships-cards/
+          rsync -avz --delete -e "ssh -p ${{ vars.SFTP_PORT }}" deploy/ ${{ vars.SFTP_USERNAME }}@${{ vars.SFTP_SERVER }}:${{ vars.SFTP_REMOTE_PLUGIN_PATH }}/woocommerce-memberships-cards/
