@@ -1,4 +1,5 @@
-yamlname: Deploy to Development
+yaml
+name: Deploy to Development
 
 on:
   push:
