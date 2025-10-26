@@ -17,10 +17,10 @@ jobs:
       - name: Deploy via SFTP
         uses: wlixcc/SFTP-Deploy-Action@v1.2.4
         with:
-          username: ${{ secrets.SFTP_USERNAME }}
-          server: ${{ secrets.SFTP_SERVER }}
+          username: ${{ vars.SFTP_USERNAME }}
+          server: ${{ vars.SFTP_SERVER }}
           password: ${{ secrets.SFTP_PASSWORD }}
-          port: ${{ secrets.SFTP_PORT }}
+          port: ${{ vars.SFTP_PORT }}
           local_path: './*'
-          remote_path: '${{ secrets.SFTP_REMOTE_PATH }}/plugins/your-plugin-name'
+          remote_path: '${{ vars.SFTP_REMOTE_PLUGIN_PATH }}/woocommerce-memberships-cards'
           sftp_only: true
