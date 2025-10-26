@@ -3,7 +3,7 @@
  * Plugin Name: WooCommerce Memberships Cards
  * Plugin URI: https://github.com/yourusername/woocommerce-memberships-cards
  * Description: Display membership cards with PDF download functionality on My Account page
- * Version: 1.0.2
+ * Version: 1.0.3
  * Author: Your Name
  * Author URI: https://your-site.com
  * License: GPL v2 or later
@@ -49,6 +49,24 @@ if (file_exists(WC_MEMBERSHIPS_CARDS_PLUGIN_DIR . 'vendor/autoload.php')) {
 // Load helper functions
 require_once WC_MEMBERSHIPS_CARDS_PLUGIN_DIR . 'includes/functions.php';
 
+/**
+ * Check if WooCommerce Memberships is active
+ *
+ * @return bool
+ */
+function wc_memberships_cards_is_memberships_active(): bool {
+    $active_plugins = (array) get_option('active_plugins', []);
+    
+    if (is_multisite()) {
+        $active_plugins = array_merge($active_plugins, array_keys(get_site_option('active_sitewide_plugins', [])));
+    }
+    
+    $plugin_file = 'woocommerce-memberships/woocommerce-memberships.php';
+    $is_plugin_active = in_array($plugin_file, $active_plugins, true) || array_key_exists($plugin_file, $active_plugins);
+    
+    return get_option('wc_memberships_is_active', false) && $is_plugin_active;
+}
+
 // Initialize plugin
 if (!function_exists('wc_memberships_cards_init')) {
     /**
@@ -62,7 +80,7 @@ if (!function_exists('wc_memberships_cards_init')) {
         }
 
         // Check if WooCommerce Memberships is active
-        if (!function_exists('wc_memberships')) {
+        if (!wc_memberships_cards_is_memberships_active()) {
             add_action('admin_notices', 'wc_memberships_cards_memberships_missing_notice');
             return;
         }
@@ -71,6 +89,10 @@ if (!function_exists('wc_memberships_cards_init')) {
         Plugin::get_instance();
     }
 
+    // Check dependencies at admin_init (for admin context)
+    add_action('admin_init', 'wc_memberships_cards_init');
+    
+    // Also initialize at plugins_loaded (for frontend)
     add_action('plugins_loaded', 'wc_memberships_cards_init');
 
     // Declare WooCommerce HPOS compatibility
