@@ -1,0 +1,222 @@
+# Cursor Rules for WooCommerce Memberships Plugin
+
+You are an expert in WordPress, WooCommerce, and WooCommerce Memberships plugin development.
+
+## Core Technologies
+- **WordPress**: 6.0+ required
+- **PHP**: 7.4+ (preferably 8.0+)
+- **WooCommerce**: Latest stable version
+- **WooCommerce Memberships**: Plugin integration target
+
+## Development Standards
+
+### PHP & WordPress
+- Use strict typing: `declare(strict_types=1);` at the top of each PHP file
+- Follow WordPress PHP Coding Standards and WooCommerce coding standards
+- Use modern PHP features (type declarations, arrow functions when appropriate)
+- Always use WordPress escaping functions: `esc_html()`, `esc_attr()`, `esc_url()`, `esc_textarea()`, `wp_kses_post()`
+- Always use WordPress sanitization functions: `sanitize_text_field()`, `sanitize_email()`, etc.
+- Implement proper nonce verification for all form submissions
+- Use `wp_enqueue_script()` and `wp_enqueue_style()` for asset management
+- Implement proper activation/deactivation hooks
+- Use internationalization with `__()`, `_e()`, `_n()`, etc. with proper text domain
+
+### WooCommerce Specific
+- Always check if WooCommerce is active before using WooCommerce functions
+- Use WooCommerce hooks (actions and filters) for extensibility
+- Use WooCommerce's logging system: `wc_get_logger()->debug()`, `wc_get_logger()->error()`
+- Use WooCommerce REST API classes when appropriate
+- Follow WooCommerce naming conventions
+- Use WooCommerce's built-in functions instead of core WordPress functions where applicable
+- Example: Use `wc_get_product()` instead of `get_post()` for products
+
+### WooCommerce Memberships Integration
+- Target WooCommerce Memberships plugin functionality
+- Use Memberships hooks and filters when extending behavior
+- Reference membership plans, members, access rules appropriately
+- Use `wc_memberships_is_user_member()` and related functions
+- Consider membership status and rules when developing features
+- Implement proper membership restriction logic
+
+## File Structure
+```
+woocommerce-memberships-cards/
+├── woocommerce-memberships-cards.php    # Main plugin file
+├── includes/                             # Core functionality
+│   ├── class-plugin.php                  # Main plugin class
+│   └── ...
+├── admin/                                # Admin-specific code
+│   └── ...
+├── public/                               # Frontend-specific code
+│   └── ...
+├── assets/                               # CSS, JS, images
+│   ├── css/
+│   ├── js/
+│   └── images/
+├── languages/                            # Translation files
+└── readme.txt                            # WordPress plugin header
+```
+
+## Coding Patterns
+
+### Plugin Header
+```php
+<?php
+/**
+ * Plugin Name: WooCommerce Memberships Cards
+ * Plugin URI: https://your-site.com
+ * Description: Plugin description
+ * Version: 1.0.0
+ * Author: Your Name
+ * Author URI: https://your-site.com
+ * License: GPL v2 or later
+ * License URI: https://www.gnu.org/licenses/gpl-2.0.html
+ * Text Domain: woocommerce-memberships-cards
+ * Domain Path: /languages
+ * Requires at least: 5.8
+ * Requires PHP: 7.4
+ * WC requires at least: 5.0
+ * WC tested up to: 8.0
+ */
+```
+
+### Main Plugin Class Pattern
+```php
+declare(strict_types=1);
+
+namespace WooCommerceMembershipsCards;
+
+if (!defined('ABSPATH')) {
+    exit;
+}
+
+class Plugin {
+    private static $instance = null;
+    
+    public static function get_instance() {
+        if (null === self::$instance) {
+            self::$instance = new self();
+        }
+        return self::$instance;
+    }
+    
+    private function __construct() {
+        $this->init();
+    }
+    
+    private function init() {
+        // Check dependencies
+        add_action('admin_init', [$this, 'check_dependencies']);
+        
+        // Initialize components
+        if (is_admin()) {
+            new Admin();
+        }
+        new Public_Interface();
+    }
+    
+    public function check_dependencies() {
+        if (!class_exists('WooCommerce')) {
+            add_action('admin_notices', [$this, 'woocommerce_missing_notice']);
+            deactivate_plugins(plugin_basename(__FILE__));
+        }
+    }
+    
+    public function woocommerce_missing_notice() {
+        echo '<div class="error"><p>';
+        esc_html_e('WooCommerce Memberships Cards requires WooCommerce to be installed and active.', 'woocommerce-memberships-cards');
+        echo '</p></div>';
+    }
+}
+
+Plugin::get_instance();
+```
+
+### Hook Usage
+```php
+// Actions
+add_action('woocommerce_before_single_product', 'your_callback');
+add_action('woocommerce_membership_created', 'your_callback');
+
+// Filters
+add_filter('woocommerce_product_get_price', 'modify_price', 10, 2);
+add_filter('woocommerce_membership_has_active_access', 'check_custom_access', 10, 3);
+```
+
+### REST API Pattern (if implementing)
+```php
+add_action('rest_api_init', function() {
+    register_rest_route('wc/v3', '/membership-cards', [
+        'methods' => 'GET',
+        'callback' => 'get_membership_cards',
+        'permission_callback' => function() {
+            return current_user_can('read_private_posts');
+        }
+    ]);
+});
+```
+
+## Best Practices
+
+### Security
+- Always sanitize user input
+- Always escape output
+- Use nonces for all forms
+- Verify user capabilities before performing actions
+- Use `wp_unslash()` and `wp_slash()` appropriately
+- Use prepared statements for database queries
+
+### Performance
+- Use transients for caching expensive operations
+- Implement object caching where appropriate
+- Use `wp_cache_get()` and `wp_cache_set()`
+- Load scripts/styles conditionally
+- Minimize database queries
+
+### Database
+- Use WordPress database abstraction (`$wpdb`)
+- Always use `$wpdb->prepare()` for queries
+- Use `dbDelta()` for schema changes
+- Implement proper data validation
+
+### Testing
+- Test with WooCommerce test data
+- Test with various membership scenarios
+- Verify proper activation/deactivation
+- Test network compatibility if applicable
+
+## Common WooCommerce Functions to Use
+- `WC()->session->set()` / `get()` - Session handling
+- `wc_add_notice()` - Add admin/cart notices
+- `wc_get_logger()` - Logging
+- `wc_get_product()` - Get product object
+- `wc_get_order()` - Get order object
+- `WC()->cart` - Cart operations
+- `WC()->customer` - Customer data
+
+## Common WooCommerce Memberships Functions to Use
+- `wc_memberships_is_user_member()` - Check membership status
+- `wc_memberships_get_user_memberships()` - Get user memberships
+- `wc_memberships_get_user_membership()` - Get specific membership
+- `WC_Memberships_User_Membership()` - Membership object operations
+
+## Development Guidelines
+- Write self-documenting code with clear variable names
+- Add docblocks to all classes and methods
+- Implement proper error handling
+- Use dependency injection where beneficial
+- Keep classes focused and cohesive
+- Prefer composition over inheritance
+- Write code that's easily testable
+
+## Debugging
+- Use `wp_debug()` and `wp_debug_log()` for logging
+- Use WooCommerce debug mode for store-specific issues
+- Check WooCommerce system status for compatibility
+- Use Query Monitor plugin when developing
+
+## Version Management
+- Follow semantic versioning (MAJOR.MINOR.PATCH)
+- Update readme.txt and plugin header on version changes
+- Maintain changelog in readme.txt
+- Consider backward compatibility for updates
