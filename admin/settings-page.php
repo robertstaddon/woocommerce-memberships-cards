@@ -53,7 +53,7 @@ $saved_logos = get_option('wc_memberships_cards_logos', []);
                                     <span class="no-logo"><?php esc_html_e('No logo set', 'woocommerce-memberships-cards'); ?></span>
                                 <?php endif; ?>
                             </div>
-                            <input type="hidden" name="<?php echo esc_attr(\WooCommerceMembershipsCards\Admin_Settings::OPTION_NAME); ?>[<?php echo esc_attr($plan_id); ?>]" value="<?php echo esc_attr($attachment_id); ?>" class="logo-attachment-id" />
+                            <input type="hidden" name="<?php echo esc_attr(\WooCommerceMembershipsCards\Admin_Settings::OPTION_NAME); ?>[<?php echo esc_attr($plan_id); ?>]" value="<?php echo esc_attr($attachment_id); ?>" class="logo-attachment-id" data-plan-id="<?php echo esc_attr($plan_id); ?>" />
                         </td>
                         <td>
                             <button type="button" class="button wc-memberships-cards-upload-logo" data-plan-id="<?php echo esc_attr($plan_id); ?>">

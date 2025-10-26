@@ -28,32 +28,19 @@
             mediaUploader.on('select', function() {
                 const attachment = mediaUploader.state().get('selection').first().toJSON();
 
-                // Save via AJAX
-                $.ajax({
-                    url: wcMembershipsCards.ajaxUrl,
-                    type: 'POST',
-                    data: {
-                        action: 'wc_memberships_cards_save_logo',
-                        nonce: wcMembershipsCards.nonce,
-                        plan_id: planId,
-                        attachment_id: attachment.id
-                    },
-                    success: function(response) {
-                        if (response.success) {
-                            // Update preview
-                            updateLogoPreview(planId, response.data.image_url, response.data.attachment_id);
+                // Update preview
+                updateLogoPreview(planId, attachment.url, attachment.id);
 
-                            // Update hidden field
-                            $('input[data-plan-id="' + planId + '"]').val(response.data.attachment_id);
+                // Update hidden field
+                $('input.logo-attachment-id[data-plan-id="' + planId + '"]').val(attachment.id);
 
-                            // Show remove button if hidden
-                            $('[data-plan-id="' + planId + '"]').find('.wc-memberships-cards-remove-logo').remove();
-                            $button.after(
-                                '<button type="button" class="button wc-memberships-cards-remove-logo" data-plan-id="' + planId + '">Remove</button>'
-                            );
-                        }
-                    }
-                });
+                // Show remove button if not already visible
+                const $removeButton = $button.siblings('.wc-memberships-cards-remove-logo[data-plan-id="' + planId + '"]');
+                if ($removeButton.length === 0) {
+                    $button.after(
+                        '<button type="button" class="button wc-memberships-cards-remove-logo" data-plan-id="' + planId + '">Remove</button>'
+                    );
+                }
             });
 
             // Open the uploader
@@ -67,29 +54,14 @@
             const $button = $(this);
             const planId = $button.data('plan-id');
 
-            // Save empty via AJAX
-            $.ajax({
-                url: wcMembershipsCards.ajaxUrl,
-                type: 'POST',
-                data: {
-                    action: 'wc_memberships_cards_save_logo',
-                    nonce: wcMembershipsCards.nonce,
-                    plan_id: planId,
-                    attachment_id: 0
-                },
-                success: function(response) {
-                    if (response.success) {
-                        // Clear preview
-                        updateLogoPreview(planId, '', '');
+            // Clear preview
+            updateLogoPreview(planId, '', '');
 
-                        // Update hidden field
-                        $('input[data-plan-id="' + planId + '"]').val('');
+            // Clear hidden field
+            $('input.logo-attachment-id[data-plan-id="' + planId + '"]').val('');
 
-                        // Remove remove button
-                        $button.remove();
-                    }
-                }
-            });
+            // Remove remove button
+            $button.remove();
         });
 
         /**

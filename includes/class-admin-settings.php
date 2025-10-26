@@ -29,7 +29,6 @@ class Admin_Settings {
         add_action('admin_menu', [$this, 'add_settings_page']);
         add_action('admin_init', [$this, 'register_settings']);
         add_action('admin_enqueue_scripts', [$this, 'enqueue_scripts']);
-        add_action('wp_ajax_wc_memberships_cards_save_logo', [$this, 'ajax_save_logo']);
     }
 
     /**
@@ -108,39 +107,6 @@ class Admin_Settings {
             [],
             WC_MEMBERSHIPS_CARDS_VERSION
         );
-    }
-
-    /**
-     * AJAX handler to save logo
-     */
-    public function ajax_save_logo(): void {
-        check_ajax_referer('wc_memberships_cards_ajax', 'nonce');
-
-        if (!current_user_can('manage_woocommerce')) {
-            wp_send_json_error(['message' => esc_html__('Insufficient permissions', 'woocommerce-memberships-cards')]);
-        }
-
-        $plan_id = absint($_POST['plan_id'] ?? 0);
-        $attachment_id = absint($_POST['attachment_id'] ?? 0);
-
-        if (!$plan_id) {
-            wp_send_json_error(['message' => esc_html__('Invalid plan ID', 'woocommerce-memberships-cards')]);
-        }
-
-        $saved_logos = get_option(self::OPTION_NAME, []);
-        $saved_logos[$plan_id] = $attachment_id;
-
-        update_option(self::OPTION_NAME, $saved_logos);
-
-        $image_url = '';
-        if ($attachment_id) {
-            $image_url = wp_get_attachment_image_url($attachment_id, 'full');
-        }
-
-        wp_send_json_success([
-            'attachment_id' => $attachment_id,
-            'image_url' => $image_url,
-        ]);
     }
 
     /**

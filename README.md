@@ -114,6 +114,13 @@ Plugin::load_template('membership-card.php', $args);
 
 ## Changelog
 
+### 1.0.11
+- Removed immediate AJAX save functionality, now saves only on "Save Changes" button click
+- Simplified JavaScript to only update UI elements and hidden form fields
+- Added `data-plan-id` attribute to hidden inputs for proper field selection
+- Removed unused AJAX handler code from Admin_Settings class
+- Form submission now properly saves all logos to database
+
 ### 1.0.10
 - Fixed "Save Changes" button not persisting logos on Membership Cards Logos admin page
 - Changed OPTION_NAME constant from private to public to allow template access

@@ -4,7 +4,7 @@ Tags: woocommerce, memberships, cards, pdf, my-account
 Requires at least: 6.0
 Tested up to: 6.4
 Requires PHP: 7.4
-Stable tag: 1.0.10
+Stable tag: 1.0.11
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -72,6 +72,13 @@ Go to WooCommerce → Membership Cards in the admin, and use the media uploader 
 3. Downloaded PDF example
 
 == Changelog ==
+
+= 1.0.11 =
+* Removed immediate AJAX save functionality, now saves only on "Save Changes" button click
+* Simplified JavaScript to only update UI elements and hidden form fields
+* Added `data-plan-id` attribute to hidden inputs for proper field selection
+* Removed unused AJAX handler code from Admin_Settings class
+* Form submission now properly saves all logos to database
 
 = 1.0.10 =
 * Fixed "Save Changes" button not persisting logos on Membership Cards Logos admin page
