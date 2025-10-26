@@ -22,6 +22,20 @@ jobs:
       - name: Install Composer dependencies
         run: composer install --no-dev --optimize-autoloader
       
+      - name: Prepare deployment directory
+        run: |
+          mkdir -p deploy
+          cp -r admin deploy/
+          cp -r assets deploy/
+          cp -r includes deploy/
+          cp -r templates deploy/
+          cp -r vendor deploy/
+          cp *.php deploy/
+          cp LICENSE deploy/
+          cp composer.json deploy/
+          cp README.md deploy/ || true
+          cp readme.txt deploy/ || true
+      
       - name: Deploy via SFTP
         uses: wlixcc/SFTP-Deploy-Action@v1.2.4
         with:
@@ -29,23 +43,6 @@ jobs:
           server: ${{ vars.SFTP_SERVER }}
           password: ${{ secrets.SFTP_PASSWORD }}
           port: ${{ vars.SFTP_PORT }}
-          local_path: './*'
+          local_path: './deploy/*'
           remote_path: '${{ vars.SFTP_REMOTE_PLUGIN_PATH }}/woocommerce-memberships-cards'
           sftp_only: true
-          sync_filters: |
-            + admin/**
-            + assets/**
-            + includes/**
-            + templates/**
-            + vendor/**
-            + *.php
-            + LICENSE
-            + composer.json
-            + README.md
-            + readme.txt
-            - .git/**
-            - .github/**
-            - *.sh
-            - *.bat
-            - node_modules/**
-            - .gitignore
