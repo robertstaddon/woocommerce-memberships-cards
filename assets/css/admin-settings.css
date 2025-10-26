@@ -1,0 +1,62 @@
+/**
+ * Admin settings styles
+ */
+
+.woocommerce-memberships-cards-settings {
+    max-width: 1200px;
+}
+
+.wc-memberships-cards-plans-table {
+    width: 100%;
+    background: white;
+    border-collapse: collapse;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+
+.wc-memberships-cards-plans-table th {
+    background: #f7f7f7;
+    padding: 15px;
+    text-align: left;
+    font-weight: 600;
+    border-bottom: 2px solid #ddd;
+}
+
+.wc-memberships-cards-plans-table td {
+    padding: 20px 15px;
+    border-bottom: 1px solid #e0e0e0;
+    vertical-align: middle;
+}
+
+.wc-memberships-cards-plans-table tbody tr:hover {
+    background: #f9f9f9;
+}
+
+.wc-memberships-cards-plans-table tbody tr:last-child td {
+    border-bottom: none;
+}
+
+.wc-memberships-cards-logo-preview {
+    min-height: 80px;
+    display: flex;
+    align-items: center;
+}
+
+.wc-memberships-cards-logo-preview img {
+    max-width: 150px;
+    max-height: 150px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 5px;
+    background: white;
+}
+
+.wc-memberships-cards-logo-preview .no-logo {
+    color: #999;
+    font-style: italic;
+}
+
+.wc-memberships-cards-upload-logo,
+.wc-memberships-cards-remove-logo {
+    margin-right: 10px;
+}
+

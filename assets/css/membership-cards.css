@@ -1,0 +1,146 @@
+/**
+ * Membership cards frontend styles
+ */
+
+.woocommerce-memberships-cards-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 30px;
+    margin-top: 20px;
+}
+
+.woocommerce-memberships-cards-empty {
+    padding: 40px;
+    text-align: center;
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.woocommerce-memberships-cards-empty p {
+    margin: 0;
+    font-size: 16px;
+    color: #666;
+}
+
+.wc-membership-card {
+    background: #fff;
+    border-radius: 12px;
+    padding: 30px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.wc-membership-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+
+.wc-membership-card-header {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 20px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid #f0f0f0;
+}
+
+.wc-membership-card-logo {
+    width: 80px;
+    height: 80px;
+    flex-shrink: 0;
+}
+
+.wc-membership-card-logo img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.wc-membership-card-title {
+    font-size: 22px;
+    font-weight: bold;
+    color: #333;
+    margin: 0;
+    flex: 1;
+}
+
+.wc-membership-card-status {
+    display: inline-block;
+    padding: 6px 12px;
+    border-radius: 6px;
+    font-size: 12px;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.wc-membership-card-status.status-active {
+    background: #4caf50;
+    color: white;
+}
+
+.wc-membership-card-status.status-expired {
+    background: #f44336;
+    color: white;
+}
+
+.wc-membership-card-status.status-cancelled {
+    background: #ff9800;
+    color: white;
+}
+
+.wc-membership-card-status.status-pending {
+    background: #9e9e9e;
+    color: white;
+}
+
+.wc-membership-card-field {
+    margin-bottom: 12px;
+    font-size: 14px;
+    line-height: 1.6;
+}
+
+.wc-membership-card-field-label {
+    font-weight: 600;
+    color: #666;
+    margin-right: 8px;
+}
+
+.wc-membership-card-field-value {
+    color: #333;
+}
+
+.wc-membership-card-profile-fields {
+    margin-top: 20px;
+    padding-top: 20px;
+    border-top: 1px solid #f0f0f0;
+}
+
+.wc-membership-card-footer {
+    margin-top: 25px;
+    padding-top: 20px;
+    border-top: 1px solid #f0f0f0;
+}
+
+.wc-membership-card-download {
+    display: inline-block;
+    padding: 10px 20px;
+    background: #0073aa;
+    color: white;
+    text-decoration: none;
+    border-radius: 6px;
+    transition: background 0.2s;
+}
+
+.wc-membership-card-download:hover {
+    background: #005a87;
+    color: white;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    .woocommerce-memberships-cards-container {
+        grid-template-columns: 1fr;
+    }
+}
+

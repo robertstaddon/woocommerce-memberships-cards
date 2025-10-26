@@ -1,0 +1,23 @@
+{
+    "name": "woocommerce/woocommerce-memberships-cards",
+    "description": "Display membership cards with PDF download functionality for WooCommerce Memberships",
+    "type": "wordpress-plugin",
+    "license": "GPL-2.0-or-later",
+    "require": {
+        "php": ">=7.4",
+        "dompdf/dompdf": "^2.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "WooCommerceMembershipsCards\\": "includes/"
+        }
+    },
+    "config": {
+        "allow-plugins": {
+            "composer/installers": true
+        }
+    },
+    "minimum-stability": "stable",
+    "prefer-stable": true
+}
+
