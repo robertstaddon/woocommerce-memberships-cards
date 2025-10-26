@@ -4,7 +4,7 @@ Tags: woocommerce, memberships, cards, pdf, my-account
 Requires at least: 6.0
 Tested up to: 6.4
 Requires PHP: 7.4
-Stable tag: 1.0.7
+Stable tag: 1.0.8
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -72,6 +72,11 @@ Go to WooCommerce → Membership Cards in the admin, and use the media uploader 
 3. Downloaded PDF example
 
 == Changelog ==
+
+= 1.0.8 =
+* Fixed SSH key setup in GitHub Actions using here-document syntax
+* Resolved multi-line private key formatting issues in deployment workflow
+* Ensured proper handling of SSH private key content with newlines preserved
 
 = 1.0.7 =
 * Switched from SFTP to rsync for faster deployments

@@ -114,6 +114,11 @@ Plugin::load_template('membership-card.php', $args);
 
 ## Changelog
 
+### 1.0.8
+- Fixed SSH key setup in GitHub Actions using here-document syntax
+- Resolved multi-line private key formatting issues in deployment workflow
+- Ensured proper handling of SSH private key content with newlines preserved
+
 ### 1.0.7
 - Switched from SFTP to rsync for faster deployments
 - Implemented delta sync to only transfer changed files
