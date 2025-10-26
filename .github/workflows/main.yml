@@ -36,15 +36,16 @@ jobs:
           cp README.md deploy/ || true
           cp readme.txt deploy/ || true
       
-      - name: Set up SSH key
+      - name: Setup SSH Agent
+        uses: webfactory/ssh-agent@v0.9.0
+        with:
+          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+      
+      - name: Add Known Hosts
         run: |
           mkdir -p ~/.ssh
-          cat > ~/.ssh/id_ed25519 <<'EOF'
-          ${{ secrets.SSH_PRIVATE_KEY }}
-          EOF
-          chmod 600 ~/.ssh/id_ed25519
           ssh-keyscan -H ${{ vars.SFTP_SERVER }} >> ~/.ssh/known_hosts
       
       - name: Deploy via rsync
         run: |
-          rsync -avz --delete -e "ssh -i ~/.ssh/id_ed25519" deploy/ ${{ vars.SFTP_USERNAME }}@${{ vars.SFTP_SERVER }}:${{ vars.SFTP_REMOTE_PLUGIN_PATH }}/woocommerce-memberships-cards/
+          rsync -avz --delete -e "ssh" deploy/ ${{ vars.SFTP_USERNAME }}@${{ vars.SFTP_SERVER }}:${{ vars.SFTP_REMOTE_PLUGIN_PATH }}/woocommerce-memberships-cards/
