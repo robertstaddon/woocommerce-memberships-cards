@@ -4,7 +4,7 @@ Tags: woocommerce, memberships, cards, pdf, my-account
 Requires at least: 6.0
 Tested up to: 6.4
 Requires PHP: 7.4
-Stable tag: 1.0.3
+Stable tag: 1.0.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -73,6 +73,12 @@ Go to WooCommerce → Membership Cards in the admin, and use the media uploader 
 
 == Changelog ==
 
+= 1.0.4 =
+* Fixed fatal error when Plugin class not found
+* Added proper namespace reference for Plugin class
+* Added check for composer dependencies installation
+* Improved error messages for missing dependencies
+
 = 1.0.3 =
 * Implemented robust WooCommerce Memberships detection using plugin activation state and option checks
 * Added support for multisite installations
@@ -94,6 +100,9 @@ Go to WooCommerce → Membership Cards in the admin, and use the media uploader 
 * Security with nonce verification
 
 == Upgrade Notice ==
+
+= 1.0.4 =
+Critical update - fixes fatal error when activating plugin. Run "composer install" before activating.
 
 = 1.0.3 =
 Critical update - fixes WooCommerce Memberships detection issues in all environments.

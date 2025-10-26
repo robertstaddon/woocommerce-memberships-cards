@@ -114,6 +114,12 @@ Plugin::load_template('membership-card.php', $args);
 
 ## Changelog
 
+### 1.0.4
+- Fixed fatal error when Plugin class not found
+- Added proper namespace reference for Plugin class
+- Added check for composer dependencies installation
+- Improved error messages for missing dependencies
+
 ### 1.0.3
 - Implemented robust WooCommerce Memberships detection using plugin activation state and option checks
 - Added support for multisite installations

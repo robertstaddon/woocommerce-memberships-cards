@@ -3,7 +3,7 @@
  * Plugin Name: WooCommerce Memberships Cards
  * Plugin URI: https://github.com/yourusername/woocommerce-memberships-cards
  * Description: Display membership cards with PDF download functionality on My Account page
- * Version: 1.0.3
+ * Version: 1.0.4
  * Author: Your Name
  * Author URI: https://your-site.com
  * License: GPL v2 or later
@@ -85,8 +85,14 @@ if (!function_exists('wc_memberships_cards_init')) {
             return;
         }
 
+        // Check if Plugin class is loaded (composer dependencies installed)
+        if (!class_exists('\WooCommerceMembershipsCards\Plugin')) {
+            add_action('admin_notices', 'wc_memberships_cards_dependencies_missing_notice');
+            return;
+        }
+
         // Initialize main plugin class
-        Plugin::get_instance();
+        \WooCommerceMembershipsCards\Plugin::get_instance();
     }
 
     // Check dependencies at admin_init (for admin context)
@@ -129,6 +135,18 @@ function wc_memberships_cards_memberships_missing_notice(): void {
         esc_html__('%1$s requires %2$s to be installed and active.', 'woocommerce-memberships-cards'),
         '<strong>' . esc_html__('WooCommerce Memberships Cards', 'woocommerce-memberships-cards') . '</strong>',
         '<strong>' . esc_html__('WooCommerce Memberships', 'woocommerce-memberships-cards') . '</strong>'
+    );
+    echo '<div class="error"><p>' . wp_kses_post($message) . '</p></div>';
+}
+
+/**
+ * Display notice if composer dependencies are missing
+ */
+function wc_memberships_cards_dependencies_missing_notice(): void {
+    $message = sprintf(
+        /* translators: %s is the plugin name */
+        esc_html__('%s requires composer dependencies to be installed. Please run "composer install" in the plugin directory.', 'woocommerce-memberships-cards'),
+        '<strong>' . esc_html__('WooCommerce Memberships Cards', 'woocommerce-memberships-cards') . '</strong>'
     );
     echo '<div class="error"><p>' . wp_kses_post($message) . '</p></div>';
 }
