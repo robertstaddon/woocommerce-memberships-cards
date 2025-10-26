@@ -3,7 +3,7 @@
  * Plugin Name: WooCommerce Memberships Cards
  * Plugin URI: https://github.com/yourusername/woocommerce-memberships-cards
  * Description: Display membership cards with PDF download functionality on My Account page
- * Version: 1.0.4
+ * Version: 1.0.5
  * Author: Your Name
  * Author URI: https://your-site.com
  * License: GPL v2 or later
@@ -41,10 +41,16 @@ if (!defined('WC_MEMBERSHIPS_CARDS_PLUGIN_BASENAME')) {
     define('WC_MEMBERSHIPS_CARDS_PLUGIN_BASENAME', plugin_basename(__FILE__));
 }
 
-// Load composer autoloader
+// Load composer autoloader (for vendor dependencies like Dompdf)
 if (file_exists(WC_MEMBERSHIPS_CARDS_PLUGIN_DIR . 'vendor/autoload.php')) {
     require_once WC_MEMBERSHIPS_CARDS_PLUGIN_DIR . 'vendor/autoload.php';
 }
+
+// Manually load plugin classes (hybrid approach)
+require_once WC_MEMBERSHIPS_CARDS_PLUGIN_DIR . 'includes/class-plugin.php';
+require_once WC_MEMBERSHIPS_CARDS_PLUGIN_DIR . 'includes/class-my-account.php';
+require_once WC_MEMBERSHIPS_CARDS_PLUGIN_DIR . 'includes/class-admin-settings.php';
+require_once WC_MEMBERSHIPS_CARDS_PLUGIN_DIR . 'includes/class-pdf-generator.php';
 
 // Load helper functions
 require_once WC_MEMBERSHIPS_CARDS_PLUGIN_DIR . 'includes/functions.php';

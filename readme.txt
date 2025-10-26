@@ -4,7 +4,7 @@ Tags: woocommerce, memberships, cards, pdf, my-account
 Requires at least: 6.0
 Tested up to: 6.4
 Requires PHP: 7.4
-Stable tag: 1.0.4
+Stable tag: 1.0.5
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -72,6 +72,12 @@ Go to WooCommerce → Membership Cards in the admin, and use the media uploader 
 3. Downloaded PDF example
 
 == Changelog ==
+
+= 1.0.5 =
+* Implemented hybrid autoloading approach (vendor autoloader + manual class loading)
+* Changed from PSR-4 to classmap autoloading for better WordPress compatibility
+* Fixed class loading issues in deployed environments
+* Improved compatibility with WordPress plugin architecture
 
 = 1.0.4 =
 * Fixed fatal error when Plugin class not found

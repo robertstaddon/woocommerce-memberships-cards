@@ -114,6 +114,12 @@ Plugin::load_template('membership-card.php', $args);
 
 ## Changelog
 
+### 1.0.5
+- Implemented hybrid autoloading approach (vendor autoloader + manual class loading)
+- Changed from PSR-4 to classmap autoloading for better WordPress compatibility
+- Fixed class loading issues in deployed environments
+- Improved compatibility with WordPress plugin architecture
+
 ### 1.0.4
 - Fixed fatal error when Plugin class not found
 - Added proper namespace reference for Plugin class
