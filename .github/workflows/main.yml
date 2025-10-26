@@ -3,7 +3,7 @@ name: Deploy to Development
 on:
   push:
     branches:
-      - develop  # or main, or whatever branch you want to trigger deployment
+      - develop  # adjust to your preferred branch
 
 jobs:
   deploy:
@@ -19,8 +19,8 @@ jobs:
           username: ${{ secrets.SFTP_USERNAME }}
           server: ${{ secrets.SFTP_SERVER }}
           password: ${{ secrets.SFTP_PASSWORD }}
-          # or use SSH key instead:
+          # or use SSH key (recommended):
           # ssh_private_key: ${{ secrets.SFTP_SSH_KEY }}
           local_path: './*'
-          remote_path: '/var/www/html'
+          remote_path: '${{ secrets.SFTP_REMOTE_PLUGINS_PATH }}/woocommerce-membership-cards'
           sftp_only: true
