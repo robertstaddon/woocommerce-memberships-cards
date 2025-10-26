@@ -20,6 +20,7 @@ jobs:
           username: ${{ secrets.SFTP_USERNAME }}
           server: ${{ secrets.SFTP_SERVER }}
           password: ${{ secrets.SFTP_PASSWORD }}
+          port: ${{ secrets.SFTP_PORT }}
           local_path: './*'
           remote_path: '${{ secrets.SFTP_REMOTE_PATH }}/plugins/your-plugin-name'
           sftp_only: true
