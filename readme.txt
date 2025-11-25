@@ -4,7 +4,7 @@ Tags: woocommerce, memberships, cards, pdf, my-account
 Requires at least: 6.0
 Tested up to: 6.4
 Requires PHP: 7.4
-Stable tag: 1.0.11
+Stable tag: 1.0.12
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -59,7 +59,14 @@ Yes, each membership card has a download button that generates a PDF on-the-fly.
 
 = Can I customize the card design? =
 
-Yes, you can override templates in your theme directory. See the documentation for details.
+Yes, you can override templates in your theme directory. Place your custom templates in:
+
+your-theme/
+  └── woocommerce-memberships-cards/
+      ├── membership-card.php
+      └── membership-card-pdf.php
+
+The plugin will automatically use your theme templates instead of the default plugin templates.
 
 = How do I assign logos to membership plans? =
 
@@ -72,6 +79,11 @@ Go to WooCommerce → Membership Cards in the admin, and use the media uploader 
 3. Downloaded PDF example
 
 == Changelog ==
+
+= 1.0.12 =
+* Reorganized membership card layout: logo at top, title underneath, status on the right
+* Fixed BR tag appearing between field labels and values by removing newlines between spans
+* Updated CSS to support new header layout structure
 
 = 1.0.11 =
 * Removed immediate AJAX save functionality, now saves only on "Save Changes" button click

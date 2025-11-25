@@ -31,23 +31,26 @@ $pdf_url = add_query_arg(
 
 <div class="wc-membership-card">
     <div class="wc-membership-card-header">
-        <?php if ($plan_logo) : ?>
-            <div class="wc-membership-card-logo">
-                <img src="<?php echo esc_url($plan_logo); ?>" alt="<?php echo esc_attr($plan->get_name()); ?>" />
-            </div>
-        <?php endif; ?>
+        <div class="wc-membership-card-header-left">
+            <?php if ($plan_logo) : ?>
+                <div class="wc-membership-card-logo">
+                    <img src="<?php echo esc_url($plan_logo); ?>" alt="<?php echo esc_attr($plan->get_name()); ?>" />
+                </div>
+            <?php endif; ?>
 
-        <h3 class="wc-membership-card-title"><?php echo esc_html($plan->get_name()); ?></h3>
+            <h3 class="wc-membership-card-title"><?php echo esc_html($plan->get_name()); ?></h3>
+        </div>
 
-        <span class="wc-membership-card-status status-<?php echo esc_attr($status); ?>">
-            <?php echo esc_html(ucfirst($status)); ?>
-        </span>
+        <div class="wc-membership-card-header-right">
+            <span class="wc-membership-card-status status-<?php echo esc_attr($status); ?>">
+                <?php echo esc_html(ucfirst($status)); ?>
+            </span>
+        </div>
     </div>
 
     <?php if ($end_date) : ?>
         <div class="wc-membership-card-field">
-            <span class="wc-membership-card-field-label"><?php esc_html_e('Expires:', 'woocommerce-memberships-cards'); ?></span>
-            <span class="wc-membership-card-field-value"><?php echo esc_html(date_i18n(get_option('date_format'), strtotime($end_date))); ?></span>
+            <span class="wc-membership-card-field-label"><?php esc_html_e('Expires:', 'woocommerce-memberships-cards'); ?></span><span class="wc-membership-card-field-value"><?php echo esc_html(date_i18n(get_option('date_format'), strtotime($end_date))); ?></span>
         </div>
     <?php endif; ?>
 
@@ -56,8 +59,7 @@ $pdf_url = add_query_arg(
             <?php foreach ($profile_fields as $field) : ?>
                 <?php if (!empty($field['value'])) : ?>
                     <div class="wc-membership-card-field">
-                        <span class="wc-membership-card-field-label"><?php echo esc_html($field['label']); ?>:</span>
-                        <span class="wc-membership-card-field-value"><?php echo esc_html($field['value']); ?></span>
+                        <span class="wc-membership-card-field-label"><?php echo esc_html($field['label']); ?>:</span><span class="wc-membership-card-field-value"><?php echo esc_html($field['value']); ?></span>
                     </div>
                 <?php endif; ?>
             <?php endforeach; ?>

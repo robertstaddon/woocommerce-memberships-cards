@@ -114,6 +114,11 @@ Plugin::load_template('membership-card.php', $args);
 
 ## Changelog
 
+### 1.0.12
+- Reorganized membership card layout: logo at top, title underneath, status on the right
+- Fixed BR tag appearing between field labels and values by removing newlines between spans
+- Updated CSS to support new header layout structure
+
 ### 1.0.11
 - Removed immediate AJAX save functionality, now saves only on "Save Changes" button click
 - Simplified JavaScript to only update UI elements and hidden form fields
