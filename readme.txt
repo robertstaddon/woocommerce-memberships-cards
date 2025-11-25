@@ -4,7 +4,7 @@ Tags: woocommerce, memberships, cards, pdf, my-account
 Requires at least: 6.0
 Tested up to: 6.4
 Requires PHP: 7.4
-Stable tag: 1.0.12
+Stable tag: 1.0.13
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -79,6 +79,11 @@ Go to WooCommerce → Membership Cards in the admin, and use the media uploader 
 3. Downloaded PDF example
 
 == Changelog ==
+
+= 1.0.13 =
+* Reorganized membership card header: logo on left, status on right, title below spanning full width
+* Added customer information section (name and email) above profile fields
+* Improved card layout and visual hierarchy
 
 = 1.0.12 =
 * Reorganized membership card layout: logo at top, title underneath, status on the right

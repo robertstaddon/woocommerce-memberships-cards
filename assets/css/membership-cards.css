@@ -26,7 +26,7 @@
 .wc-membership-card {
     background: #fff;
     border-radius: 12px;
-    padding: 30px;
+    padding: 15px 30px;
     box-shadow: 0 2px 8px rgba(0,0,0,0.1);
     transition: transform 0.2s, box-shadow 0.2s;
 }
@@ -37,29 +37,30 @@
 }
 
 .wc-membership-card-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
     margin-bottom: 20px;
     padding-bottom: 20px;
     border-bottom: 2px solid #f0f0f0;
 }
 
+.wc-membership-card-header-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 15px;
+}
+
 .wc-membership-card-header-left {
     display: flex;
-    flex-direction: column;
-    gap: 10px;
-    flex: 1;
+    align-items: flex-start;
 }
 
 .wc-membership-card-header-right {
     display: flex;
     align-items: flex-start;
-    margin-left: 20px;
 }
 
 .wc-membership-card-logo {
-    width: 80px;
+    width: 150px;
     height: 80px;
     flex-shrink: 0;
 }
@@ -75,6 +76,7 @@
     font-weight: bold;
     color: #333;
     margin: 0;
+    width: 100%;
 }
 
 .wc-membership-card-status {
@@ -120,6 +122,12 @@
 
 .wc-membership-card-field-value {
     color: #333;
+}
+
+.wc-membership-card-customer-info {
+    margin-top: 20px;
+    padding-top: 20px;
+    border-top: 1px solid #f0f0f0;
 }
 
 .wc-membership-card-profile-fields {

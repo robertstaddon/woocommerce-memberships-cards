@@ -114,6 +114,11 @@ Plugin::load_template('membership-card.php', $args);
 
 ## Changelog
 
+### 1.0.13
+- Reorganized membership card header: logo on left, status on right, title below spanning full width
+- Added customer information section (name and email) above profile fields
+- Improved card layout and visual hierarchy
+
 ### 1.0.12
 - Reorganized membership card layout: logo at top, title underneath, status on the right
 - Fixed BR tag appearing between field labels and values by removing newlines between spans
