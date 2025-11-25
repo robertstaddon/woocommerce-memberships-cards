@@ -8,7 +8,7 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-latest
-    environment: Abundant Designs Beta Server
+    environment: Abundant Designs ATDSA
     
     steps:
       - name: Checkout code
