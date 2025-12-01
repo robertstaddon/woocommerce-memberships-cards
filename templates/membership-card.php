@@ -87,7 +87,7 @@ $pdf_url = add_query_arg(
 
     <div class="wc-membership-card-footer">
         <a href="<?php echo esc_url($pdf_url); ?>" class="wc-membership-card-download button" target="_blank">
-            <?php esc_html_e('Download PDF', 'woocommerce-memberships-cards'); ?>
+            <?php esc_html_e('Download', 'woocommerce-memberships-cards'); ?>
         </a>
     </div>
 </div>
