@@ -51,7 +51,8 @@ class PDF_Generator {
         // Create Dompdf instance
         $dompdf = new Dompdf($options);
         $dompdf->loadHtml($html);
-        $dompdf->setPaper([0, 0, 850, 600]); // Custom size for membership card
+        // Use US Letter size (8.5 x 11 inches) in portrait orientation
+        $dompdf->setPaper('letter', 'portrait');
         $dompdf->render();
 
         // Output PDF

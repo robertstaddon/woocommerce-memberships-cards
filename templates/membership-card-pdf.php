@@ -16,8 +16,15 @@ if (!defined('ABSPATH')) {
 }
 
 // Get status info
-$status = $membership->get_status();
+$status   = $membership->get_status();
 $end_date = $membership->get_end_date();
+
+// Get customer information
+$user_id    = $membership->get_user_id();
+$user       = get_userdata($user_id);
+$first_name = get_user_meta($user_id, 'first_name', true);
+$last_name  = get_user_meta($user_id, 'last_name', true);
+$email      = $user ? $user->user_email : '';
 
 // Use absolute URL for logo in PDF
 $logo_url = '';
@@ -43,18 +50,15 @@ if ($plan_logo) {
         
         body {
             font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-            width: 850px;
-            height: 600px;
-            position: relative;
             background: #f5f5f5;
         }
         
         .membership-card {
             width: 100%;
-            height: 100%;
-            background: white;
+            min-height: 100%;
+            background: #ffffff;
             border-radius: 12px;
-            padding: 40px;
+            padding: 40px 50px;
             box-shadow: 0 2px 8px rgba(0,0,0,0.1);
         }
         
@@ -64,12 +68,25 @@ if ($plan_logo) {
             margin-bottom: 30px;
             display: flex;
             justify-content: space-between;
-            align-items: center;
+            align-items: flex-start;
+        }
+        
+        .card-header-left {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+        }
+        
+        .card-header-right {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
         }
         
         .card-logo {
-            max-width: 120px;
-            max-height: 120px;
+            max-width: 150px;
+            max-height: 80px;
+            margin-bottom: 10px;
         }
         
         .card-logo img {
@@ -78,11 +95,10 @@ if ($plan_logo) {
         }
         
         .card-title {
-            font-size: 28px;
+            font-size: 24px;
             font-weight: bold;
             color: #333;
-            flex: 1;
-            text-align: center;
+            margin: 0;
         }
         
         .card-status {
@@ -129,6 +145,29 @@ if ($plan_logo) {
             padding-top: 20px;
             border-top: 1px solid #e0e0e0;
         }
+
+        .legal-notice {
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid #e0e0e0;
+            font-size: 12px;
+            color: #444;
+        }
+
+        .legal-notice h2 {
+            font-size: 14px;
+            margin: 0 0 10px 0;
+            font-weight: bold;
+        }
+
+        .legal-notice ol {
+            margin: 0 0 0 18px;
+            padding: 0;
+        }
+
+        .legal-notice li {
+            margin-bottom: 6px;
+        }
         
         .footer {
             margin-top: 30px;
@@ -141,23 +180,41 @@ if ($plan_logo) {
 <body>
     <div class="membership-card">
         <div class="card-header">
-            <?php if ($logo_url) : ?>
-                <div class="card-logo">
-                    <img src="<?php echo esc_url($logo_url); ?>" alt="<?php echo esc_html($plan->get_name()); ?>" />
-                </div>
-            <?php endif; ?>
-            
-            <h1 class="card-title"><?php echo esc_html($plan->get_name()); ?></h1>
-            
-            <span class="card-status status-<?php echo esc_attr($status); ?>">
-                <?php echo esc_html(ucfirst($status)); ?>
-            </span>
+            <div class="card-header-left">
+                <?php if ($logo_url) : ?>
+                    <div class="card-logo">
+                        <img src="<?php echo esc_url($logo_url); ?>" alt="<?php echo esc_html($plan->get_name()); ?>" />
+                    </div>
+                <?php endif; ?>
+
+                <h1 class="card-title"><?php echo esc_html($plan->get_name()); ?></h1>
+            </div>
+
+            <div class="card-header-right">
+                <span class="card-status status-<?php echo esc_attr($status); ?>">
+                    <?php echo esc_html(ucfirst($status)); ?>
+                </span>
+
+                <?php if ($end_date) : ?>
+                    <div class="card-field" style="margin-top:8px; font-size:13px; text-align:right;">
+                        <span class="field-label"><?php esc_html_e('Expires:', 'woocommerce-memberships-cards'); ?></span>
+                        <span class="field-value"><?php echo esc_html(date_i18n(get_option('date_format'), strtotime($end_date))); ?></span>
+                    </div>
+                <?php endif; ?>
+            </div>
         </div>
 
-        <?php if ($end_date) : ?>
+        <?php if ($first_name || $last_name) : ?>
             <div class="card-field">
-                <span class="field-label"><?php esc_html_e('Expires:', 'woocommerce-memberships-cards'); ?></span>
-                <span class="field-value"><?php echo esc_html(date_i18n(get_option('date_format'), strtotime($end_date))); ?></span>
+                <span class="field-label"><?php esc_html_e('Name:', 'woocommerce-memberships-cards'); ?></span>
+                <span class="field-value"><?php echo esc_html(trim($first_name . ' ' . $last_name)); ?></span>
+            </div>
+        <?php endif; ?>
+
+        <?php if ($email) : ?>
+            <div class="card-field">
+                <span class="field-label"><?php esc_html_e('Email:', 'woocommerce-memberships-cards'); ?></span>
+                <span class="field-value"><?php echo esc_html($email); ?></span>
             </div>
         <?php endif; ?>
 
@@ -173,6 +230,15 @@ if ($plan_logo) {
                 <?php endforeach; ?>
             </div>
         <?php endif; ?>
+
+        <div class="legal-notice">
+            <h2>If you are pulled over</h2>
+            <ol>
+                <li>Do not engage the officer. If he asks "Do you know why I pulled you over?" say "I am not sure. I always follow the law."</li>
+                <li>Calmy take the ticket and follow the officers instructions -- we will get our day in court to argue your case.</li>
+            </ol>
+            <p style="margin-top:10px;">For assistance, call 888-253-6235 or email tickets@atdsa.com to report any citations.</p>
+        </div>
 
         <div class="footer">
             <p><?php echo esc_html(get_bloginfo('name')); ?> &copy; <?php echo esc_html(gmdate('Y')); ?></p>

@@ -114,6 +114,11 @@ Plugin::load_template('membership-card.php', $args);
 
 ## Changelog
 
+### 1.0.15
+- Updated PDF membership card layout to show expiry directly beneath the status badge
+- Added \"If you are pulled over\" legal guidance section to the bottom of the PDF
+- Included phone and email contact instructions to report citations from the PDF card
+
 ### 1.0.14
 - Added explicit expiry date row beneath the membership title using the site's date format
 - Ensured customer information and profile fields only render when data is present to avoid empty rows
