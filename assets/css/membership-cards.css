@@ -109,7 +109,6 @@
 }
 
 .wc-membership-card-field {
-    margin-bottom: 12px;
     font-size: 14px;
     line-height: 1.6;
 }
@@ -126,8 +125,6 @@
 
 .wc-membership-card-customer-info {
     margin-top: 20px;
-    padding-top: 20px;
-    border-top: 1px solid #f0f0f0;
 }
 
 .wc-membership-card-profile-fields {

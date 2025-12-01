@@ -114,6 +114,11 @@ Plugin::load_template('membership-card.php', $args);
 
 ## Changelog
 
+### 1.0.14
+- Added explicit expiry date row beneath the membership title using the site's date format
+- Ensured customer information and profile fields only render when data is present to avoid empty rows
+- Refined card spacing and section separation for clearer visual hierarchy
+
 ### 1.0.13
 - Reorganized membership card header: logo on left, status on right, title below spanning full width
 - Added customer information section (name and email) above profile fields

@@ -53,7 +53,7 @@ function wc_memberships_cards_get_profile_fields(\WC_Memberships_User_Membership
 
     foreach ($fields as $field) {
         $profile_fields[] = [
-            'label' => $field->get_label(),
+            'label' => $field->get_name(),
             'value' => $field->get_value(),
             'name' => $field->get_name(),
         ];

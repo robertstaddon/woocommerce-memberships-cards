@@ -55,31 +55,25 @@ $pdf_url = add_query_arg(
         </div>
 
         <h3 class="wc-membership-card-title"><?php echo esc_html($plan->get_name()); ?></h3>
-    </div>
-
-    <?php if ($end_date) : ?>
+        <?php if ($end_date) : ?>
         <div class="wc-membership-card-field">
             <span class="wc-membership-card-field-label"><?php esc_html_e('Expires:', 'woocommerce-memberships-cards'); ?></span><span class="wc-membership-card-field-value"><?php echo esc_html(date_i18n(get_option('date_format'), strtotime($end_date))); ?></span>
         </div>
-    <?php endif; ?>
+        <?php endif; ?>
+    </div>
 
-    <?php if ($first_name || $last_name || $email) : ?>
-        <div class="wc-membership-card-customer-info">
-            <?php if ($first_name || $last_name) : ?>
-                <div class="wc-membership-card-field">
-                    <span class="wc-membership-card-field-label"><?php esc_html_e('Name:', 'woocommerce-memberships-cards'); ?></span><span class="wc-membership-card-field-value"><?php echo esc_html(trim($first_name . ' ' . $last_name)); ?></span>
-                </div>
-            <?php endif; ?>
-            <?php if ($email) : ?>
-                <div class="wc-membership-card-field">
-                    <span class="wc-membership-card-field-label"><?php esc_html_e('Email:', 'woocommerce-memberships-cards'); ?></span><span class="wc-membership-card-field-value"><?php echo esc_html($email); ?></span>
-                </div>
-            <?php endif; ?>
-        </div>
-    <?php endif; ?>
-
-    <?php if (!empty($profile_fields)) : ?>
-        <div class="wc-membership-card-profile-fields">
+    <div class="wc-membership-card-customer-info">
+        <?php if ($first_name || $last_name) : ?>
+            <div class="wc-membership-card-field">
+                <span class="wc-membership-card-field-label"><?php esc_html_e('Name:', 'woocommerce-memberships-cards'); ?></span><span class="wc-membership-card-field-value"><?php echo esc_html(trim($first_name . ' ' . $last_name)); ?></span>
+            </div>
+        <?php endif; ?>
+        <?php if ($email) : ?>
+            <div class="wc-membership-card-field">
+                <span class="wc-membership-card-field-label"><?php esc_html_e('Email:', 'woocommerce-memberships-cards'); ?></span><span class="wc-membership-card-field-value"><?php echo esc_html($email); ?></span>
+            </div>
+        <?php endif; ?>
+        <?php if (!empty($profile_fields)) : ?>
             <?php foreach ($profile_fields as $field) : ?>
                 <?php if (!empty($field['value'])) : ?>
                     <div class="wc-membership-card-field">
@@ -87,8 +81,9 @@ $pdf_url = add_query_arg(
                     </div>
                 <?php endif; ?>
             <?php endforeach; ?>
-        </div>
-    <?php endif; ?>
+        <?php endif; ?>
+
+    </div>
 
     <div class="wc-membership-card-footer">
         <a href="<?php echo esc_url($pdf_url); ?>" class="wc-membership-card-download button" target="_blank">
