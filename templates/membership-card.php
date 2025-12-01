@@ -26,11 +26,12 @@ $first_name = get_user_meta($user_id, 'first_name', true);
 $last_name = get_user_meta($user_id, 'last_name', true);
 $email = $user ? $user->user_email : '';
 
-// Generate PDF URL
+// Generate PDF URL with cache-busting query arg
 $pdf_url = add_query_arg(
     [
         'membership_card_pdf' => $membership->get_id(),
-        'nonce' => wp_create_nonce('membership_card_pdf_' . $membership->get_id()),
+        'nonce'               => wp_create_nonce('membership_card_pdf_' . $membership->get_id()),
+        't'                   => (string) wp_rand(100000, 999999),
     ],
     home_url()
 );

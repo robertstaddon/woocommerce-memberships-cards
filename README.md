@@ -114,6 +114,9 @@ Plugin::load_template('membership-card.php', $args);
 
 ## Changelog
 
+### 1.0.18
+- Added cache-busting query parameter to membership card PDF download URL to avoid browser reusing old PDFs
+
 ### 1.0.17
 - Remove status from printed PDF card
 
