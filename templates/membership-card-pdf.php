@@ -59,7 +59,7 @@ if ($plan_logo) {
         }
         
         .membership-card {
-            width: 100%;
+            width: 90%;
             background: #ffffff;
             border-radius: 12px;
             padding: 40px 50px;
@@ -196,7 +196,7 @@ if ($plan_logo) {
 
                 <?php if ($end_date) : ?>
                     <div class="card-field" style="margin-top:8px; font-size:13px;">
-                        <span class="field-label"><?php esc_html_e('Expires:', 'woocommerce-memberships-cards'); ?></span>
+                        <span class="field-label"><?php esc_html_e('Expires on ', 'woocommerce-memberships-cards'); ?></span>
                         <span class="field-value">
                             <?php echo esc_html(date_i18n(get_option('date_format'), strtotime($end_date))); ?>
                         </span>
@@ -205,18 +205,12 @@ if ($plan_logo) {
 
                 <?php if (!empty($next_payment)) : ?>
                     <div class="card-field" style="margin-top:4px; font-size:13px;">
-                        <span class="field-label"><?php esc_html_e('Next Bill On:', 'woocommerce-memberships-cards'); ?></span>
+                        <span class="field-label"><?php esc_html_e('Active until ', 'woocommerce-memberships-cards'); ?></span>
                         <span class="field-value">
                             <?php echo esc_html($next_payment); ?>
                         </span>
                     </div>
                 <?php endif; ?>
-            </div>
-
-            <div class="card-header-right">
-                <span class="card-status status-<?php echo esc_attr($status); ?>">
-                    <?php echo esc_html(ucfirst($status)); ?>
-                </span>
             </div>
         </div>
 

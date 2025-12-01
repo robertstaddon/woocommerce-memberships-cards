@@ -114,6 +114,9 @@ Plugin::load_template('membership-card.php', $args);
 
 ## Changelog
 
+### 1.0.17
+- Remove status from printed PDF card
+
 ### 1.0.16
 - Moved PDF membership card expiry row under the membership title on the left side
 - Added \"Next Bill On\" date beneath expiry using the membership's next bill date when available

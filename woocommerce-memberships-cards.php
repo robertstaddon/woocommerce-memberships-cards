@@ -3,7 +3,7 @@
  * Plugin Name: WooCommerce Memberships Cards
  * Plugin URI: https://github.com/yourusername/woocommerce-memberships-cards
  * Description: Display membership cards with PDF download functionality on My Account page
- * Version: 1.0.16
+ * Version: 1.0.17
  * Author: Your Name
  * Author URI: https://your-site.com
  * License: GPL v2 or later
@@ -26,7 +26,7 @@ if (!defined('ABSPATH')) {
 
 // Define plugin constants
 if (!defined('WC_MEMBERSHIPS_CARDS_VERSION')) {
-    define('WC_MEMBERSHIPS_CARDS_VERSION', '1.0.16');
+    define('WC_MEMBERSHIPS_CARDS_VERSION', '1.0.17');
 }
 
 if (!defined('WC_MEMBERSHIPS_CARDS_PLUGIN_DIR')) {
