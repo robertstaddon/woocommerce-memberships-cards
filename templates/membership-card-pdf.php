@@ -16,8 +16,13 @@ if (!defined('ABSPATH')) {
 }
 
 // Get status info
-$status   = $membership->get_status();
-$end_date = $membership->get_end_date();
+$status        = $membership->get_status();
+$end_date      = $membership->get_end_date();
+$next_payment  = '';
+
+if (method_exists($membership, 'get_next_bill_on_local_date') && function_exists('wc_date_format')) {
+    $next_payment = (string) $membership->get_next_bill_on_local_date(wc_date_format());
+}
 
 // Get customer information
 $user_id    = $membership->get_user_id();
@@ -55,11 +60,11 @@ if ($plan_logo) {
         
         .membership-card {
             width: 100%;
-            min-height: 100%;
             background: #ffffff;
             border-radius: 12px;
             padding: 40px 50px;
             box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            page-break-inside: avoid;
         }
         
         .card-header {
@@ -188,19 +193,30 @@ if ($plan_logo) {
                 <?php endif; ?>
 
                 <h1 class="card-title"><?php echo esc_html($plan->get_name()); ?></h1>
+
+                <?php if ($end_date) : ?>
+                    <div class="card-field" style="margin-top:8px; font-size:13px;">
+                        <span class="field-label"><?php esc_html_e('Expires:', 'woocommerce-memberships-cards'); ?></span>
+                        <span class="field-value">
+                            <?php echo esc_html(date_i18n(get_option('date_format'), strtotime($end_date))); ?>
+                        </span>
+                    </div>
+                <?php endif; ?>
+
+                <?php if (!empty($next_payment)) : ?>
+                    <div class="card-field" style="margin-top:4px; font-size:13px;">
+                        <span class="field-label"><?php esc_html_e('Next Bill On:', 'woocommerce-memberships-cards'); ?></span>
+                        <span class="field-value">
+                            <?php echo esc_html($next_payment); ?>
+                        </span>
+                    </div>
+                <?php endif; ?>
             </div>
 
             <div class="card-header-right">
                 <span class="card-status status-<?php echo esc_attr($status); ?>">
                     <?php echo esc_html(ucfirst($status)); ?>
                 </span>
-
-                <?php if ($end_date) : ?>
-                    <div class="card-field" style="margin-top:8px; font-size:13px; text-align:right;">
-                        <span class="field-label"><?php esc_html_e('Expires:', 'woocommerce-memberships-cards'); ?></span>
-                        <span class="field-value"><?php echo esc_html(date_i18n(get_option('date_format'), strtotime($end_date))); ?></span>
-                    </div>
-                <?php endif; ?>
             </div>
         </div>
 
@@ -219,16 +235,14 @@ if ($plan_logo) {
         <?php endif; ?>
 
         <?php if (!empty($profile_fields)) : ?>
-            <div class="profile-fields">
-                <?php foreach ($profile_fields as $field) : ?>
-                    <?php if (!empty($field['value'])) : ?>
-                        <div class="card-field">
-                            <span class="field-label"><?php echo esc_html($field['label']); ?>:</span>
-                            <span class="field-value"><?php echo esc_html($field['value']); ?></span>
-                        </div>
-                    <?php endif; ?>
-                <?php endforeach; ?>
-            </div>
+            <?php foreach ($profile_fields as $field) : ?>
+                <?php if (!empty($field['value'])) : ?>
+                    <div class="card-field">
+                        <span class="field-label"><?php echo esc_html($field['label']); ?>:</span>
+                        <span class="field-value"><?php echo esc_html($field['value']); ?></span>
+                    </div>
+                <?php endif; ?>
+            <?php endforeach; ?>
         <?php endif; ?>
 
         <div class="legal-notice">

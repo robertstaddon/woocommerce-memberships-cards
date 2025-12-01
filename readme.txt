@@ -4,7 +4,7 @@ Tags: woocommerce, memberships, cards, pdf, my-account
 Requires at least: 6.0
 Tested up to: 6.4
 Requires PHP: 7.4
-Stable tag: 1.0.15
+Stable tag: 1.0.16
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -79,6 +79,11 @@ Go to WooCommerce → Membership Cards in the admin, and use the media uploader 
 3. Downloaded PDF example
 
 == Changelog ==
+
+= 1.0.16 =
+* Moved PDF membership card expiry row under the membership title on the left side
+* Added \"Next Bill On\" date beneath expiry using the membership's next bill date when available
+* Ensured PDF layout fits cleanly on a single Letter page without unnecessary extra pages
 
 = 1.0.15 =
 * Updated PDF membership card layout to show expiry directly beneath the status badge

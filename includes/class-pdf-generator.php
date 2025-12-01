@@ -56,9 +56,14 @@ class PDF_Generator {
         $dompdf->render();
 
         // Output PDF
+        $random_suffix = function_exists('wp_generate_password')
+            ? wp_generate_password(6, false, false)
+            : (string) wp_rand(100000, 999999);
+
         $filename = sprintf(
-            'membership-card-%d.pdf',
-            $membership->get_id()
+            'membership-card-%d-%s.pdf',
+            $membership->get_id(),
+            $random_suffix
         );
 
         // Send appropriate headers

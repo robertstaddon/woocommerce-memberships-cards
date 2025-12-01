@@ -114,6 +114,11 @@ Plugin::load_template('membership-card.php', $args);
 
 ## Changelog
 
+### 1.0.16
+- Moved PDF membership card expiry row under the membership title on the left side
+- Added \"Next Bill On\" date beneath expiry using the membership's next bill date when available
+- Ensured PDF layout fits cleanly on a single Letter page without unnecessary extra pages
+
 ### 1.0.15
 - Updated PDF membership card layout to show expiry directly beneath the status badge
 - Added \"If you are pulled over\" legal guidance section to the bottom of the PDF
