@@ -4,7 +4,7 @@ Tags: woocommerce, memberships, cards, pdf, my-account
 Requires at least: 6.0
 Tested up to: 6.4
 Requires PHP: 7.4
-Stable tag: 1.0.18
+Stable tag: 1.0.20
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -79,6 +79,12 @@ Go to WooCommerce → Membership Cards in the admin, and use the media uploader 
 3. Downloaded PDF example
 
 == Changelog ==
+
+= 1.0.20 =
+* Added Member ID field (WordPress user ID) below Name and Email on both HTML and PDF membership cards
+
+= 1.0.19 =
+* Change expiration date label in the download PDF
 
 = 1.0.18 =
 * Added cache-busting query parameter to membership card PDF download URL to avoid browser reusing old PDFs

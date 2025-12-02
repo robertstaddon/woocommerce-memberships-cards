@@ -74,6 +74,9 @@ $pdf_url = add_query_arg(
                 <span class="wc-membership-card-field-label"><?php esc_html_e('Email:', 'woocommerce-memberships-cards'); ?></span><span class="wc-membership-card-field-value"><?php echo esc_html($email); ?></span>
             </div>
         <?php endif; ?>
+        <div class="wc-membership-card-field">
+            <span class="wc-membership-card-field-label"><?php esc_html_e('Member ID:', 'woocommerce-memberships-cards'); ?></span><span class="wc-membership-card-field-value"><?php echo esc_html((string) $user_id); ?></span>
+        </div>
         <?php if (!empty($profile_fields)) : ?>
             <?php foreach ($profile_fields as $field) : ?>
                 <?php if (!empty($field['value'])) : ?>
